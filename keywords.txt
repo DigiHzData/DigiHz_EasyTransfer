@@ -1,0 +1,35 @@
+##################################################
+# Syntax colouring for DigiHz_EasyTransfer library
+##################################################
+
+##################################################
+# Datatypes (KEYWORD1)
+##################################################
+DigiHz_EasyTransfer	KEYWORD1
+
+##################################################
+# Methods and Functions (KEYWORD2)
+##################################################
+getRxBufferSize	KEYWORD2	
+getTxStatus	KEYWORD2
+getTxMaxSize	KEYWORD2
+getRxStatus	KEYWORD2
+getTxAttemptsDone	KEYWORD2
+begin	KEYWORD2
+setHeaders 	KEYWORD2
+clearRxBufferOnRecieve	KEYWORD2
+setTxRetries	KEYWORD2
+setTxAckTimeout	KEYWORD2
+setFlushRxPortBufferWaitTime	KEYWORD2
+clearRxBuffer	KEYWORD2
+flushRxPortBuffer	KEYWORD2
+sendData	KEYWORD2
+receiveData	KEYWORD2
+
+##################################################
+# Constants (LITERAL1)
+##################################################
+details	LITERAL1
+rxBufferMinSize	LITERAL1
+rxBufferMaxSize	LITERAL1
+txMaxSize	LITERAL1

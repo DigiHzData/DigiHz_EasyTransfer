@@ -1,0 +1,66 @@
+V1.0.7
+------
+Constructor:
+DigiHz_EasyTransfer myTransfer(false);			Creates object myTransfer with no debug and default rx buffer size 254 bytes.
+DigiHz_EasyTransfer myTransfer(true);			Creates object myTransfer with debug and default rx buffer size 254 bytes.
+DigiHz_EasyTransfer myTransfer(false, 64);		Creates object myTransfer with no debug and rx buffer size 64 bytes.
+DigiHz_EasyTransfer myTransfer(true, 64);		Creates object myTransfer with debug and rx buffer size 64 bytes.
+
+
+Begin method:
+myTransfer.begin(&transferPort);			Transfer port, 0 mS rx port buffer flush(default), with no debug port(default).
+myTransfer.begin(&transferPort, 10);			Transfer port, 10 mS rx port buffer flush, with no debug port(default).
+myTransfer.begin(&transferPort, 0, &debugPort);		Transfer port, 0 mS rx port buffer flush, with debug port.
+myTransfer.begin(&transferPort, 10, &debugPort);	Transfer port, 10 mS rx port buffer flush, with debug port.
+
+Configuration methods:
+Must be called after begin method has been called. (Can be called at runtime to if needed).
+
+myTransfer.setHeaders();				Sets the headers to default. Default is 0x06, 0x85.
+myTransfer.setHeaders(0x07, 0x86);			Sets the headers to 0x07 and 0x86.
+myTransfer.setHeaders(0x07);				Sets the headers to 0x07 and 0x85(default).
+
+myTransfer.setTxRetries();				Sets tx retries to 5(default). Only have affect if ack is requested in sendData method.
+myTransfer.setTxRetries(10);				Sets tx retries to 10. Only have affect if ack is requested in sendData method.
+
+myTransfer.setTxAckTimeout();				Sets tx ack timeout to 50(default). Only have affect if ack is requested in sendData method.
+myTransfer.setTxAckTimeout(200);			Sets tx ack timeout to 200. Only have affect if ack is requested in sendData method.
+
+myTransfer.clearRxBufferOnRecieve();			Does not clear the temporary rx buffer with zeros on each recieve(Default).
+myTransfer.clearRxBufferOnRecieve(false);		Does not clear the temporary rx buffer with zeros on each recieve.
+myTransfer.clearRxBufferOnRecieve(true);		Clears the temporary rx buffer with zeros on each recieve.
+
+myTransfer.setFlushRxPortBufferWaitTime();		Does not flush the rx port buffer 0 mS(default)
+myTransfer.setFlushRxPortBufferWaitTime(20);		Flushes the rx port buffer for 20 mS or until the rx port buffer is empty so we not get garbage when we recieve a data packet.
+
+Rx methods:
+myTransfer.receiveData();				Returns true if data was recieved correctly. returns false if any error.
+
+myTransfer.getRxStatus();				Returns myTransfer.RX_STATUS_OK if data was recieved correctly. 
+							Returns myTransfer.RX_STATUS_BUFFER_TO_SMALL if the rx buffer is to small to recieve the data. //NOTE:This error might show if the rx port buffer is not flushed quickly enough.
+							Returns myTransfer.RX_STATUS_DATA_CHECKSUM_FAILED if the data checksum failed!
+							Returns myTransfer.RX_STATUS_ACK_CHECKSUM_FAILED if the ack checksum failed!
+
+myTransfer.getRxBufferSize();				Returns the number of bytes you reserved in the constructor of the rx buffer.
+
+myTransfer.clearRxBuffer();				Clears the temporary rx buffer with zeros.
+
+myTransfer.flushRxPortBuffer();				Does not flush the rx port buffer 0 mS(default)
+myTransfer.flushRxPortBuffer(50);			Flushes the rx port buffer for 50 mS or until the rx port buffer is empty so we not get garbage when we recieve a data packet.
+
+Tx methods:
+myTransfer.sendData(var or array or struct);		Sends var or array or struct with identifier set to 1(Default) and not requesting ack(Default). Returns true if data was sent. returns false if any error. 
+myTransfer.sendData(var or array or struct, 2);		Sends var or array or struct with identifier 2 and not requesting ack(Default). Returns true if data was sent. returns false if any error.
+myTransfer.sendData(var or array or struct, 3, true);	Sends var or array or struct with identifier 3 and requesting ack. Returns true if data was sent. returns false if any error.
+
+myTransfer.getTxStatus();				Returns myTransfer.TX_STATUS_OK if data was sent and ack was requested an ack was recieved. //NOTE:If ack request is false, this will return true even if the reciever did not recieve the packet.
+							Returns myTransfer.TX_STATUS_DATA_TO_BIG if data packet is bigger than 254 bytes.
+							Returns myTransfer.TX_INVALID_IDENTIFIER if the identifier is set to 0. (0 is reserved for ack)
+							Returns myTransfer.TX_STATUS_ACK_TIMEOUT if the ack did not get back in time. //NOTE:This will only be returned if ack request is set to true.
+							
+myTransfer.getTxMaxSize();				Returns the number of max bytes you can send.
+
+myTransfer.getTxAttemptsDone();				Will return how many attempts done to send a data packet. //NOTE:If ack request is false, then this will allways return 1.
+
+
+
