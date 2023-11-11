@@ -52,6 +52,7 @@ compileForEsp32Cam uses hardwareSerial UART 2 for transfer the data, hardwareSer
   //We use the second hardware port on ESP32, not software serial.
   #define myTransferPortSerialRxPin 16//GPIO16 UART 2 Recieve pin.
   #define myTransferPortSerialTxPin 17//GPIO17 UART 2 Transmit pin.
+  #define myTransferPort Serial2
 #elif compileForEsp32Cam
   //We use the second hardware port on ESP32-CAM, not software serial.
   #include <HardwareSerial.h>
