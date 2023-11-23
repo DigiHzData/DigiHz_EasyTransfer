@@ -194,7 +194,7 @@ void loop() {
         }
       }
     } else {
-      Serial.println(F("Recieved unknown identifier!"));
+      Serial.print(F("Recieved unknown identifier:"));Serial.println(myTransfer.rxIdentifier);
     }
     Serial.println();
   } else {//If any error.
