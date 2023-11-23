@@ -1,4 +1,6 @@
 # DigiHz_EasyTransfer
+<i>The missing serial library with ack?</i>
+
 Send and recieve any serial data with or without ack.
 I was missing any library that could handle ack, so i made my own and wanted to share it to you all.
 You can send / recieve vars, arrays, and structs.
