@@ -11,7 +11,7 @@ And you can send / recieve chunks to. Look at the example.
 
 Tested on arduino pro mini (3.3v), nodeMCU, ESP32 and ESP32-cam.
 
-I am planning on making an example of sending esp32-cam captured image to another esp32.
+An example of sending esp32-cam captured image to another esp32 is now added.
 
 The examples have a lot of documentation, so i dont have to explain to much here.
 
