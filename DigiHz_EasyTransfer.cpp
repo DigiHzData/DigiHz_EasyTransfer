@@ -355,7 +355,7 @@ bool DigiHz_EasyTransfer::receiveData(){
           return true;
         } else {//We recieved an ack packet.
           if (_debug) {
-            _debugPort->println(F("DBG:Recieved ack packet."));
+			_debugPort->print(F("DBG:Recieved ack packet for identifier "));_debugPort->println(_txIdentifier);
             _debugPort->print(F("DBG:rx ack packet checksum:"));_debugPort->println(rxBuffer[0]);
             _debugPort->println(F("DBG:rx ack packet checksum OK."));
           }
@@ -402,3 +402,4 @@ bool DigiHz_EasyTransfer::receiveData(){
   _rxStatus = RX_STATUS_UNKNOWN;
   return false;
 }
+
